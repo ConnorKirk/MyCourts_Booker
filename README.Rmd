@@ -1,0 +1,18 @@
+MVP
+
+
+User enters court they wish to book. Specific court, day and time.
+
+
+Chron Job at 7am, two weeks before.
+
+
+#To Do
+* ~~Login - Authenticate~~
+
+* Read court that needs to be booked
+* Map "human" court selection to website
+
+* ~~Navigate to two weeks for the day (day could be flexible in later models?)~~
+
+* Identify court to book (What link to book?!)
