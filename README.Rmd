@@ -16,3 +16,28 @@ Chron Job at 7am, two weeks before.
 * ~~Navigate to two weeks for the day (day could be flexible in later models?)~~
 
 * Identify court to book (What link to book?!)
+
+#The Process
+
+##Motivation
+
+I like squash. Mycourts is a court booking system. It allows you to log in through an account book courts. Depending on where you play, this can be quite competitive process. Courts are available to book up to 14 days in advance at 7am on the day. I'd often forget to book these, so I wanted a way to set it and forget it!
+
+## A proof of concept
+
+My first goal was to walk through the process of booking a court using just `R`. This took me three days when I had spare moments. Despite using the system frequently, I had no clue how it operated behind the UI, so a lot of this time was spent exploring the system and improving my knowledge of `httr` and `rvest`.
+I started Monday morning on the train to Birmingam.
+Navigating to mycourts.co.uk was easy enough. My first real hurdle was logging in.
+
+By Tuesday morning I had successfully logged in through R. Along the way I has learnt a bit about sessions, forms and CSS selectors (I was going to learn even more on these very soon).
+
+The next challenge was navigating to the day. For ease of having a court that no one else would book, I chose 14 days away. Mycourts makes this easy, as the dates are relative to today's date, so the url for 14 days away is always the same.
+
+After that, I had to select the court desired. The core of this is finding following the "book this court" link for the desired court. As this was a proof of concept, I already knew what court I wanted, so the challenge here was just identifying the correct link and following it.
+
+
+Finally, once I had found followed the "book this court" link, it takes you to a final confirmation page. This was another round of learning css selectors so that I could narrow down the correct link to follow.
+
+SUCCESS! I had booked a court through `R`.
+
+Along the way, I realised that in fact some of this was not neccessary. Rather than having to narrow down which court I want and select that link, I realise there was a general stucture to the booking hyperlinks. I could instead construct the hyperlink for the court that I wanted! 
