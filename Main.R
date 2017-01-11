@@ -54,7 +54,7 @@ sesh <- sesh %>%
 
 confirmation_link <- sesh %>%
   read_html() %>%
-  html_node("td:nth-child(4)") %>%
+  html_node(css = "#right_col > table > tr:nth-child(2) > td:nth-child(4) > a") %>%
   html_attr("href") %>%
   paste0(mycourts_url, .) %>%
   stringr::str_replace_all(pattern = " ", replacement = "%20")
