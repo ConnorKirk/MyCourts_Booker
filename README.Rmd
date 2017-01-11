@@ -1,21 +1,16 @@
-MVP
-
-
-User enters court they wish to book. Specific court, day and time.
-
-
-Chron Job at 7am, two weeks before.
-
-
 #To Do
 * ~~Login - Authenticate~~
 
 * Read court that needs to be booked
-* Map "human" court selection to website
+* ~~Map "human" court selection to website~~
 
 * ~~Navigate to two weeks for the day (day could be flexible in later models?)~~
 
 * Identify court to book (What link to book?!)
+* Identify pattern court id, `ctid`. Can it be calculated, or derived?
+* Move court numbers from `Main.R` to a seperate sheet. Are they even needed?
+* Devise way of entering court required. Or even a vector of required courts!
+* Investigate methods to run this program at 7am when needed.
 
 #The Process
 
