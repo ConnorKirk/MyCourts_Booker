@@ -32,13 +32,33 @@ h_form_submit <- submit_form(form = h_form_values_set,
 
 
 # Navigate to Correct Date
-jump_to(sesh, "https://edgbastonpriory.mycourts.co.uk/bookings.asp?st1=1600&st2=2400&d=14&tabID=132")
+sesh <- sesh %>%
+  jump_to("https://edgbastonpriory.mycourts.co.uk/bookings.asp?st1=1600&st2=2400&d=14&tabID=132")
 
 #Log in Works
 
 read_html(sesh) %>%
-  html_node(xpath = '//*[@id="court566"]/div[11]/a') %>%
+  html_nodes("#left_col a")
   
+booking_link <- sesh %>%
+  read_html() %>%
+  html_node("#court563 .book_this_court") %>%
+  html_attr("href") %>%
+  paste0(mycourts_url, .) %>%
+  stringr::str_replace_all(pattern = " ", replacement = "%20")
 
+
+
+sesh <- sesh %>%
+  jump_to(booking_link)
+
+confirmation_link <- sesh %>%
+  read_html() %>%
+  html_node("td:nth-child(4)") %>%
+  html_attr("href") %>%
+  paste0(mycourts_url, .) %>%
+  stringr::str_replace_all(pattern = " ", replacement = "%20")
   
+sesh <- sesh %>%
+  jump_to(confirmation_link)
   
