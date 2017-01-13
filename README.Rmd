@@ -11,7 +11,7 @@
 * Move court numbers from `Main.R` to a seperate sheet. Are they even needed?
 * Devise way of entering court required. Or even a vector of required courts!
 * Investigate methods to run this program at 7am when needed.
-
+* Send text alerts when a court is successfully booked? (and warnings when not?!)
 #The Process
 
 ##Motivation
@@ -36,3 +36,18 @@ Finally, once I had found followed the "book this court" link, it takes you to a
 SUCCESS! I had booked a court through `R`.
 
 Along the way, I realised that in fact some of this was not neccessary. Rather than having to narrow down which court I want and select that link, I realise there was a general stucture to the booking hyperlinks. I could instead construct the hyperlink for the court that I wanted! 
+###Thursday
+
+There are two ways I could "find" the link for the court I wish to book. The key components of the link are the `ctid` (court id) and the date. The date is easy enough to compute, I know which day I want to play ;)
+
+The court id is a bit trickier. This is a 5 digit number that represents a particular court at a particular time. After investigation, it appears that this number is the same across different days/months, and references purely a court and time. This makes sense, as otherwise the date would not be needed when constructing the query.
+
+As the court id is the same, It would be possible to create a giant mapping of court/time to court id. However, this is labour intensive (which I'm not a fan of), and wouldn't generalise well to other mycourt systems as the id's will be different!
+
+An alternative could be to make a slightly more generalised mapping, as the id of the court/time can be calculated if you know how many court slots are available in a day. This is a lot quicker to do, and would generalise more easily.
+
+A second alternative would be to create a function that would take a time and court (or if advanced, just a time), and parse the webpage to find a suitable court id. Once found, this court id could be extracted to construct the correct hyperlink. This would generalise to any club (as long as MyCourt's doesn't change..)
+
+###Friday
+
+I realised that the two step confirmation process for the courts is not actually needed for booking a court. Following the hyperlink for "confirming" a booking will book the court regardless of any previous steps (as long as you're logged in). This means that rather than choosing a court with one hyperlink, then confirming it with another, I can book courts by assembling just one hyperlink and following it.
