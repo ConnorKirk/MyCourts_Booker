@@ -3,6 +3,9 @@ library(rvest)
 library(dplyr)
 library(magrittr)
 
+
+
+
 courts <- list(court1 = "court563",
                court2 = "court564",
                court3 = "court565",
