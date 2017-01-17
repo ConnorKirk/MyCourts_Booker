@@ -6,12 +6,14 @@
 
 * ~~Navigate to two weeks for the day (day could be flexible in later models?)~~
 
-* Identify court to book (What link to book?!)
-* Identify pattern court id, `ctid`. Can it be calculated, or derived?
-* Move court numbers from `Main.R` to a seperate sheet. Are they even needed?
+* ~~Identify court to book (What link to book?!)~~
+* ~~Identify pattern court id, `ctid`. Can it be calculated, or derived?~~
+* ~~Move court numbers from `Main.R` to a seperate sheet. Are they even needed?~~
 * Devise way of entering court required. Or even a vector of required courts!
 * Investigate methods to run this program at 7am when needed.
 * Send text alerts when a court is successfully booked? (and warnings when not?!)
+
+
 #The Process
 
 ##Motivation
@@ -51,3 +53,7 @@ A second alternative would be to create a function that would take a time and co
 ###Friday
 
 I realised that the two step confirmation process for the courts is not actually needed for booking a court. Following the hyperlink for "confirming" a booking will book the court regardless of any previous steps (as long as you're logged in). This means that rather than choosing a court with one hyperlink, then confirming it with another, I can book courts by assembling just one hyperlink and following it.
+
+### Tuesday
+
+I created the first iteration of the function I described on Thursday, that takes a desired time and court and returns the `ctid` for the desired court. Once extracted, the URL to book the court can be constructed.
