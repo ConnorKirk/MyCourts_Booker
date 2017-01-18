@@ -40,9 +40,9 @@ sesh <- sesh %>%
 
 
 # #Log in Works
-# #Check log in successfull
-#  read_html(sesh) %>%
-#    html_nodes("#left_col a")
+#Check log in successfull
+       read_html(sesh)  %>%
+   html_nodes("#left_col a")
   
 
 # #Find link for "booking" court

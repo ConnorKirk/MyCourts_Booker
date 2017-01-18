@@ -18,7 +18,7 @@ court_link_selector <- function(session, court_number, court_time ) {
   session %>%
     read_html() %>%
     html_nodes(paste0("#court", court_number, " div")) %>% #creates selector ie "#court566 div"
-    stringr::str_detect(paste0(court_time, ":")) %>%
+    stringr::str_detect(paste0(">", court_time, ":")) %>%
     which()
 }
 
@@ -30,17 +30,28 @@ ctid_finder <- function(session, link_no, court_number) {
     extract2(link_no) %>%
     html_node("a") %>%
     html_attr("href") %>%
-    stringr::str_extract("(?<=ctid=)\\d\\d\\d\\d")
+    stringr::str_extract("(?<=ctid=)\\d\\d\\d\\d\\d")
 }  
 
+base_url_confirm <- "https://edgbastonpriory.mycourts.co.uk//bookings_process.asp?"
+
 create_confirmation_link <- function(session, court_number, court_time, date) {
-  link_no <-  court_link_selector(session = session, court_number = court_number, court_time = court_time)
+  session_date <- session %>%
+    jump_to("https://edgbastonpriory.mycourts.co.uk/bookings.asp?st1=0700&st2=2400&d=14&tabID=132")
+  link_no <-  court_link_selector(session = session_date,
+                                  court_number = court_number,
+                                  court_time = court_time)
   
-  ctid <- ctid_finder(session = session, link_no = link_no, court_number = court_number)
+  ctid <- ctid_finder(session = session_date,
+                      link_no = link_no[1],
+                      court_number = court_number)
+  
+  web_date <- date %>%
+    str_replace_all(" ", "%20")
   
   
-  base_url_confirm <- "https://edgbastonpriory.mycourts.co.uk//bookings_process.asp?"
-  confirmation_link <-  paste0(base_url_confirm, "ctid=", ctid, "&dt=", booking_date)
+  
+  paste0(base_url_confirm, "ctid=", ctid, "&dt=", web_date)
 }
 
 
