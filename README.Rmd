@@ -9,6 +9,8 @@
 * ~~Identify court to book (What link to book?!)~~
 * ~~Identify pattern court id, `ctid`. Can it be calculated, or derived?~~
 * ~~Move court numbers from `Main.R` to a seperate sheet. Are they even needed?~~
+* Create login function.
+* Create login function tests
 * Devise way of entering court required. Or even a vector of required courts!
 * Investigate methods to run this program at 7am when needed.
 * Send text alerts when a court is successfully booked? (and warnings when not?!)
@@ -57,3 +59,7 @@ I realised that the two step confirmation process for the courts is not actually
 ### Tuesday
 
 I created the first iteration of the function I described on Thursday, that takes a desired time and court and returns the `ctid` for the desired court. Once extracted, the URL to book the court can be constructed.
+
+###Wednesday
+
+Worked further on wrapper function to take court selection and return link that will book court. Needs some safety features though (ie "this court is already booked", "time not found", "court not found" etc)
