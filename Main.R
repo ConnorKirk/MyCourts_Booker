@@ -16,21 +16,47 @@ mycourts_url <- "https://edgbastonpriory.mycourts.co.uk/"
 #Create new session
 sesh <- html_session(mycourts_url)
 
-#read session html
-h <- sesh %>%
-  read_html() 
+# Function to login to MyCourts. Returns the refreshed session.
+MyCourts_Login <- function(session, username, password) {
+  #read session html
+  session_html <- session %>%
+    read_html() 
+  
+  #Get login form
+  login_form <- html_form(session_html)[[1]]
+  
+  #Set login form credentials
+  login_form_values_set <-  set_values(login_form,
+                                   username = username,
+                                   password = password)
+  #Submit login form
+  login_form_submit <- submit_form(form = login_form_values_set,
+                               session = session,
+                               Submit = "Submit")
+  
+  
+  
+  temp_session <- session %>% 
+    jump_to(session$url) 
+  
+  if(check_login_success(temp_session) == T){
+    message("Login Successful")
+    } else {
+    warning("login not successful")
+      
+    return(temp_session)
+  }
+}
+  
 
-#Get login form
-h_form <- html_form(h)[[1]]
-
-#Set login form credentials
-h_form_values_set <-  set_values(h_form,
-                                 username = username,
-                                 password = password)
-#Submit login form
-h_form_submit <- submit_form(form = h_form_values_set,
-                             session = sesh,
-                             Submit = "Submit")
+#Given a session, it will look for the logout link on the left column.
+#Will return true (indicating the user is logged in) if found.
+check_login_success <- function(session) {
+  read_html(session)  %>%
+    html_nodes("#left_col a") %>%
+    grepl("logout_link", .) %>%
+    any()
+}
 
 
 # Navigate to Correct Date
@@ -42,7 +68,9 @@ sesh <- sesh %>%
 # #Log in Works
 #Check log in successfull
        read_html(sesh)  %>%
-   html_nodes("#left_col a")
+   html_nodes("#left_col a") %>%
+         grepl("logout_link", .) %>%
+         any()
   
 
 # #Find link for "booking" court
@@ -76,6 +104,9 @@ sesh %>%
   read_html() %>%
   html_nodes("#court566 > div") %>%
   html_text()
+
+
+MyCourts_Login(sesh, username, password)
 
 
 
