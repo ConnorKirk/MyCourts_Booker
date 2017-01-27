@@ -9,7 +9,9 @@
 * ~~Identify court to book (What link to book?!)~~
 * ~~Identify pattern court id, `ctid`. Can it be calculated, or derived?~~
 * ~~Move court numbers from `Main.R` to a seperate sheet. Are they even needed?~~
-* Create login function.
+* ~~Create login function.~~
+* Move function definition out of `Main.R`, so that when you wish to run the program the file can be sourced.
+* Have simple login function calls (and login check) in `Main.R`
 * Create login function tests
 * Devise way of entering court required. Or even a vector of required courts!
 * Investigate methods to run this program at 7am when needed.
